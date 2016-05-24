@@ -1,10 +1,6 @@
 #!/bin/bash
 set -e
 
-dir="/httpboot"
-image="trusty.qcow2"
-
-
 # check for root privilege
 if [ "$(id -u)" != "0" ]; then
    echo " this script must be run as root" 1>&2
@@ -34,18 +30,3 @@ apt-get -y purge
 # create directory where the custom image will be stored
 mkdir -p $dir
 
-# download the custom trusty image if it doesn't yest exist
-if [[ ! -f $dir/$image ]]; then
-	echo -n " downloading image..."
-        cd $dir
-        download "https://raw.githubusercontent.com/sprmarc/isolicious/master/$image"
-fi
-
-# remove myself to prevent any unintended changes at a later stage
-rm $0
-
-# finish
-echo " DONE; rebooting ... "
-
-# reboot
-reboot
