@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+dir="/httpboot"
+
 # check for root privilege
 if [ "$(id -u)" != "0" ]; then
    echo " this script must be run as root" 1>&2
