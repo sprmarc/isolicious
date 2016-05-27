@@ -1,7 +1,12 @@
 #!/bin/bash
+
 set -e
 
-dir="/httpboot"
+####################
+# definition block #
+####################
+
+export dir="/httpboot"
 
 # check for root privilege
 if [ "$(id -u)" != "0" ]; then
@@ -22,11 +27,21 @@ download()
     echo " DONE"
 }
 
+#####################
+# operational block #
+#####################
+
 # update repos
 apt-get -y update
-apt-get -y autoremove
-apt-get -y purge
 
 # create directory where the custom image will be stored
 mkdir -p $dir
 
+# Allow passwordless sudo for members of group sudo
+sed -i "/%sudo   ALL=(ALL:ALL) ALL/c%sudo   ALL=(ALL:ALL) NOPASSWD: ALL" /etc/sudoers
+
+###################
+# finishing block #
+###################
+
+unset dir
