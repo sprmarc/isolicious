@@ -38,7 +38,6 @@ apt-get -y update
 mkdir -p $dir
 
 # Allow passwordless sudo for members of group sudo
-sed -i "/%sudo   ALL=(ALL:ALL) ALL/c%sudo   ALL=(ALL:ALL) NOPASSWD: ALL" /etc/sudoers
 
 ###################
 # finishing block #
